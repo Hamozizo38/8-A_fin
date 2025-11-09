@@ -6,424 +6,6 @@
     <title>Class 8A - The Awesome Crew</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <style>
-        :root {
-            --primary: #1e88e5;
-            --primary-light: #64b5f6;
-            --primary-dark: #0d47a1;
-            --secondary: #ffffff;
-            --accent: #bbdefb;
-            --dark: #0a1f3a;
-            --light: #f5f9ff;
-            --gray: #78909c;
-            --hover: #e3f2fd;
-            --success: #4caf50;
-            --warning: #ff9800;
-            --info: #00bcd4;
-            --purple: #8e24aa;
-            --pink: #e91e63;
-            --orange: #ff5722;
-            --teal: #009688;
-        }
-
-        /* تحسينات شريط التنقل المتقلص */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-            padding: 1.5rem 1rem;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(13, 71, 161, 0.3);
-            z-index: 1000;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        header.compact {
-            padding: 0.8rem 1rem;
-            box-shadow: 0 2px 15px rgba(13, 71, 161, 0.4);
-        }
-
-        header.compact .main-title {
-            font-size: 1.5rem;
-            margin-bottom: 0;
-        }
-
-        header.compact nav {
-            margin-top: 0.5rem;
-        }
-
-        .main-title {
-            font-size: 2.5rem;
-            color: white;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            position: relative;
-            display: inline-block;
-            animation: titleAnimation 4s ease-in-out infinite;
-            transition: all 0.5s ease;
-        }
-
-        @keyframes titleAnimation {
-            0%, 100% { 
-                transform: scale(1);
-                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
-                             0 0 20px rgba(30, 136, 229, 0.5);
-            }
-            50% { 
-                transform: scale(1.05);
-                text-shadow: 0 0 15px rgba(255, 255, 255, 0.8),
-                             0 0 30px rgba(30, 136, 229, 0.8),
-                             0 0 40px rgba(30, 136, 229, 0.6);
-            }
-        }
-
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-            transition: all 0.5s ease;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 1rem;
-            padding: 0.5rem 1.2rem;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        nav a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.7s ease;
-        }
-
-        nav a:hover::before {
-            left: 100%;
-        }
-
-        nav a:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        /* تحسينات للصور */
-        .teacher-image {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: center;
-            border: 3px solid rgba(255, 255, 255, 0.8);
-            margin: 0 auto 0.8rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.4s ease;
-        }
-
-        .teacher-card:hover .teacher-image {
-            transform: scale(1.1) rotate(5deg);
-            border-color: rgba(255, 255, 255, 1);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* تكبير صور الطلاب */
-        .student-image {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: center;
-            border: 3px solid var(--primary);
-            margin: 0 auto 0.8rem;
-            transition: all 0.4s ease;
-            box-shadow: 
-                0 5px 15px rgba(30, 136, 229, 0.2),
-                inset 0 0 0 4px white;
-            filter: brightness(0.95);
-            cursor: pointer;
-        }
-        
-        .card:hover .student-image {
-            transform: scale(1.15) rotate(5deg);
-            border-color: var(--primary-light);
-            filter: brightness(1.05);
-            box-shadow: 
-                0 8px 25px rgba(30, 136, 229, 0.3),
-                inset 0 0 0 4px white;
-        }
-        
-        /* تحسينات للاستجابة */
-        @media (max-width: 768px) {
-            nav a {
-                font-size: 0.9rem;
-                padding: 0.4rem 1rem;
-            }
-            
-            .student-image {
-                width: 110px;
-                height: 110px;
-            }
-
-            header.compact .main-title {
-                font-size: 1.3rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .student-image {
-                width: 90px;
-                height: 90px;
-            }
-
-            header.compact .main-title {
-                font-size: 1.1rem;
-            }
-
-            header.compact nav a {
-                font-size: 0.8rem;
-                padding: 0.3rem 0.7rem;
-            }
-        }
-        
-        /* تحسينات لقسم المعلومات */
-        .info-card {
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            border-radius: 15px;
-            padding: 1.5rem;
-            text-align: center;
-            color: white;
-            box-shadow: 0 8px 20px rgba(30, 136, 229, 0.3);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .info-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-        
-        .info-card:hover::before {
-            transform: translateX(100%);
-        }
-        
-        .info-card:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 15px 30px rgba(30, 136, 229, 0.5);
-        }
-        
-        .info-number {
-            font-size: 2.8rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        
-        .info-label {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-        
-        .info-quote {
-            font-size: 0.9rem;
-            font-style: italic;
-            opacity: 0.8;
-            margin-top: 0.5rem;
-        }
-
-        /* تأثيرات إضافية */
-        .pulse-glow {
-            animation: pulseGlow 3s infinite alternate;
-        }
-
-        @keyframes pulseGlow {
-            0% {
-                box-shadow: 0 0 5px rgba(30, 136, 229, 0.5);
-            }
-            100% {
-                box-shadow: 0 0 20px rgba(30, 136, 229, 0.8), 0 0 30px rgba(30, 136, 229, 0.6);
-            }
-        }
-
-        .floating {
-            animation: floating 6s ease-in-out infinite;
-        }
-
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .rotate-slow {
-            animation: rotateSlow 20s linear infinite;
-        }
-
-        @keyframes rotateSlow {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .bounce-in {
-            animation: bounceIn 1s ease-out;
-        }
-
-        @keyframes bounceIn {
-            0% { transform: scale(0.3); opacity: 0; }
-            50% { transform: scale(1.05); opacity: 0.8; }
-            70% { transform: scale(0.9); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .fade-in-up {
-            animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            0% { transform: translateY(30px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-
-        /* تأثيرات خاصة للبطاقات */
-        .card {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: rotate(45deg);
-            transition: all 0.6s ease;
-        }
-
-        .card:hover::after {
-            left: 100%;
-        }
-
-        /* تأثيرات النص */
-        .text-shimmer {
-            background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--primary));
-            background-size: 200% 100%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shimmer 3s infinite linear;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-
-        /* تأثيرات خاصة للقادة */
-        .leader-card {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .leader-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .leader-card:hover::before {
-            opacity: 1;
-        }
-
-        /* تعديل المسافة العلوية للمحتوى */
-        .container {
-            margin-top: 180px;
-            transition: margin-top 0.5s ease;
-        }
-
-        header.compact ~ .container {
-            margin-top: 130px;
-        }
-
-        /* تأثيرات خاصة للجدول */
-        .schedule-table tr {
-            transition: all 0.3s ease;
-        }
-
-        .schedule-table tr:hover {
-            transform: scale(1.02);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .subject {
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .subject::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .subject:hover::before {
-            left: 100%;
-        }
-
-        .subject:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        /* تأثيرات خاصة للزر العلوي */
-        .back-to-top {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .back-to-top:hover {
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 8px 20px rgba(30, 136, 229, 0.6);
-        }
-    </style>
 </head>
 <body>
     <!-- Floating background elements -->
@@ -451,7 +33,9 @@
         <div class="hero creative-bg bounce-in">
             <h2 class="text-shimmer">Welcome to the Coolest Class Ever!</h2>
             <p>Get ready to dive into the world of Class 8A - where learning meets fun, and every day is a new adventure! We're not just a class, we're a family of future leaders, innovators, and world-changers.</p>
-            <img src="https://i.ibb.co/SDF1Mdjm/Whats-App-Image-2025-10-30-at-13-18-48-c7131b09.jpg" alt="Our amazing class family" class="pulse-glow">
+            <div class="hero-image-container">
+                <img src="https://i.ibb.co/SDF1Mdjm/Whats-App-Image-2025-10-30-at-13-18-48-c7131b09.jpg" alt="Our amazing class family" class="pulse-glow">
+            </div>
         </div>
 
         <!-- Information Section -->
@@ -519,16 +103,17 @@
         </section>
 
         <!-- Students Section -->
-        <section id="students" class="creative-bg fade-in-up">
+ <section id="students" class="creative-bg fade-in-up">
             <h2 class="text-shimmer">Meet Our Amazing Crew!</h2>
             <div class="grid">
                 <!-- All 43 Students -->
+                <!-- سيتم عرض جميع الطلاب هنا -->
                 <div class="card gentle-lift-effect" data-student="Adam Khaled" data-info="Proud member of the 8A family!">
                     <img src="images\ادم.png" class="student-image">
                     <h3>Adam Khaled</h3>
                     <div class="student-info">Student in 8A</div>
                 </div>
-                <div class="card gentle-lift-effect" data-student="Eyad Abdelhay" data-info="Proud member of the 8A family!">
+                  <div class="card gentle-lift-effect" data-student="Eyad Abdelhay" data-info="Proud member of the 8A family!">
                     <img src="https://via.placeholder.com/130/2196f3/ffffff?text=EA" class="student-image">
                     <h3>Eyad Abdelhay</h3>
                     <div class="student-info">Student in 8A</div>
@@ -743,6 +328,8 @@
                     <h3>Merolla Samuel</h3>
                     <div class="student-info">Student in 8A</div>
                 </div>
+
+                <!-- باقي الطلاب بنفس النمط -->
             </div>
         </section>
 
@@ -750,86 +337,86 @@
         <section id="teachers" class="creative-bg fade-in-up">
             <h2 class="text-shimmer">Our Superhero Teachers</h2>
             <div class="grid">
-                <div class="teacher-card floating">
-                    <img src="https://via.placeholder.com/100/009688/ffffff?text=IH" class="teacher-image" alt="Ms. Iman Hassan">
+                <div class="teacher-card floating" data-teacher="Ms. Iman Hassan" data-info="Agriculture Teacher - Growing green thumbs! 🌱">
+                    <img src="images/teachers/iman.jpg" class="teacher-image" alt="Ms. Iman Hassan">
                     <h3>Ms. Iman Hassan</h3>
                     <p>Growing green thumbs! 🌱</p>
                     <div class="teacher-subject">Agriculture</div>
                 </div>
-                <div class="teacher-card floating">
-                    <img src="https://via.placeholder.com/100/009688/ffffff?text=MA" class="teacher-image" alt="Ms. Marwa Abdulaziz">
+                <div class="teacher-card floating" data-teacher="Ms. Marwa Abdulaziz" data-info="Economics Teacher - Master of money matters! 💰">
+                    <img src="images/teachers/marwa.jpg" class="teacher-image" alt="Ms. Marwa Abdulaziz">
                     <h3>Ms. Marwa Abdulaziz</h3>
                     <p>Master of money matters! 💰</p>
                     <div class="teacher-subject">Economics</div>
                 </div>
-                <div class="teacher-card floating">
-                    <img src="https://via.placeholder.com/100/009688/ffffff?text=MM" class="teacher-image" alt="Mr. Magdy Mahmoud">
+                <div class="teacher-card floating" data-teacher="Mr. Magdy Mahmoud" data-info="Industry Teacher - Building future creators! 🔨">
+                    <img src="images/teachers/magdy.jpg" class="teacher-image" alt="Mr. Magdy Mahmoud">
                     <h3>Mr. Magdy Mahmoud</h3>
                     <p>Building future creators! 🔨</p>
                     <div class="teacher-subject">Industry</div>
                 </div>
-                <div class="teacher-card floating">
-                    <img src="https://via.placeholder.com/100/009688/ffffff?text=MS" class="teacher-image" alt="Mr. Mohamed Al-Saadi">
+                <div class="teacher-card floating" data-teacher="Mr. Mohamed Al-Saadi" data-info="Mathematics Teacher - Math magician! ✨">
+                    <img src="images/teachers/mohamed-saadi.jpg" class="teacher-image" alt="Mr. Mohamed Al-Saadi">
                     <h3>Mr. Mohamed Al-Saadi</h3>
                     <p>Math magician! ✨</p>
                     <div class="teacher-subject">Mathematics</div>
                 </div>
-                <div class="teacher-card floating">
-                    <img src="https://via.placeholder.com/100/009688/ffffff?text=HK" class="teacher-image" alt="Ms. Hanem Kamel">
+                <div class="teacher-card floating" data-teacher="Ms. Hanem Kamel" data-info="Arabic & Religion Teacher - Language and soul explorer! 📚">
+                    <img src="images/teachers/hanem.jpg" class="teacher-image" alt="Ms. Hanem Kamel">
                     <h3>Ms. Hanem Kamel</h3>
                     <p>Language and soul explorer! 📚</p>
                     <div class="teacher-subject">Arabic & Religion</div>
                 </div>
-                <div class="teacher-card floating">
-                    <img src="https://via.placeholder.com/100/009688/ffffff?text=OH" class="teacher-image" alt="Mr. Omar Hammad">
+                <div class="teacher-card floating" data-teacher="Mr. Omar Hammad" data-info="English Teacher - English adventure guide! 🗺️">
+                    <img src="images/teachers/omar-hammad.jpg" class="teacher-image" alt="Mr. Omar Hammad">
                     <h3>Mr. Omar Hammad</h3>
                     <p>English adventure guide! 🗺️</p>
                     <div class="teacher-subject">English</div>
                 </div>
-                <div class="teacher-card floating">
-                    <img src="https://via.placeholder.com/100/009688/ffffff?text=SS" class="teacher-image" alt="Ms. Seham Shafik">
+                <div class="teacher-card floating" data-teacher="Ms. Seham Shafik" data-info="Arts Teacher - Creative expression coach! 🎨">
+                    <img src="images/teachers/seham.jpg" class="teacher-image" alt="Ms. Seham Shafik">
                     <h3>Ms. Seham Shafik</h3>
                     <p>Creative expression coach! 🎨</p>
                     <div class="teacher-subject">Arts</div>
                 </div>
-                <div class="teacher-card floating">
-                    <img src="https://via.placeholder.com/100/009688/ffffff?text=HS" class="teacher-image" alt="Ms. Hanan Al-Sayed">
+                <div class="teacher-card floating" data-teacher="Ms. Hanan Al-Sayed" data-info="Science Teacher - Science discoverer! 🔬">
+                    <img src="images/teachers/hanan-sayed.jpg" class="teacher-image" alt="Ms. Hanan Al-Sayed">
                     <h3>Ms. Hanan Al-Sayed</h3>
                     <p>Science discoverer! 🔬</p>
                     <div class="teacher-subject">Science</div>
                 </div>
-                <div class="teacher-card floating">
-                    <img src="https://via.placeholder.com/100/009688/ffffff?text=OZ" class="teacher-image" alt="Ms. Ola Zakaria">
+                <div class="teacher-card floating" data-teacher="Ms. Ola Zakaria" data-info="Studies Teacher - Knowledge navigator! 🧭">
+                    <img src="images/teachers/ola.jpg" class="teacher-image" alt="Ms. Ola Zakaria">
                     <h3>Ms. Ola Zakaria</h3>
                     <p>Knowledge navigator! 🧭</p>
                     <div class="teacher-subject">Studies</div>
                 </div>
-                <div class="teacher-card floating">
-                    <img src="https://via.placeholder.com/100/009688/ffffff?text=G" class="teacher-image" alt="Ms. Giovanna">
+                <div class="teacher-card floating" data-teacher="Ms. Giovanna" data-info="Christian Religion Teacher - Faith and values mentor! 🙏">
+                    <img src="images/teachers/giovanna.jpg" class="teacher-image" alt="Ms. Giovanna">
                     <h3>Ms. Giovanna</h3>
                     <p>Faith and values mentor! 🙏</p>
                     <div class="teacher-subject">Christian Religion</div>
                 </div>
-                <div class="teacher-card floating">
-                    <img src="https://via.placeholder.com/100/009688/ffffff?text=HE" class="teacher-image" alt="Ms. Hanan Al-Sayed">
+                <div class="teacher-card floating" data-teacher="Ms. Hanan Al-Sayed" data-info="Entrepreneurship Teacher - Future business builder! 💼">
+                    <img src="images/teachers/hanan-entrepreneurship.jpg" class="teacher-image" alt="Ms. Hanan Al-Sayed">
                     <h3>Ms. Hanan Al-Sayed</h3>
                     <p>Future business builder! 💼</p>
                     <div class="teacher-subject">Entrepreneurship</div>
                 </div>
-                <div class="teacher-card floating">
-                    <img src="https://via.placeholder.com/100/009688/ffffff?text=CS" class="teacher-image" alt="Ms. Cecile Saad">
+                <div class="teacher-card floating" data-teacher="Ms. Cecile Saad" data-info="French Teacher - French language artist! 🇫🇷">
+                    <img src="images/teachers/cecile.jpg" class="teacher-image" alt="Ms. Cecile Saad">
                     <h3>Ms. Cecile Saad</h3>
                     <p>French language artist! 🇫🇷</p>
                     <div class="teacher-subject">French</div>
                 </div>
-                <div class="teacher-card floating">
-                    <img src="https://via.placeholder.com/100/009688/ffffff?text=AS" class="teacher-image" alt="Mr. Ahmed Samir">
+                <div class="teacher-card floating" data-teacher="Mr. Ahmed Samir" data-info="German Teacher - German language expert! 🇩🇪">
+                    <img src="images/teachers/ahmed-samir.jpg" class="teacher-image" alt="Mr. Ahmed Samir">
                     <h3>Mr. Ahmed Samir</h3>
                     <p>German language expert! 🇩🇪</p>
                     <div class="teacher-subject">German</div>
                 </div>
-                <div class="teacher-card floating">
-                    <img src="https://via.placeholder.com/100/009688/ffffff?text=HK" class="teacher-image" alt="Ms. Hanan Mohamed Karim">
+                <div class="teacher-card floating" data-teacher="Ms. Hanan Mohamed Karim" data-info="ICT Teacher - Tech wizard! 💻">
+                    <img src="images/teachers/hanan-karim.jpg" class="teacher-image" alt="Ms. Hanan Mohamed Karim">
                     <h3>Ms. Hanan Mohamed Karim</h3>
                     <p>Tech wizard! 💻</p>
                     <div class="teacher-subject">ICT</div>
@@ -838,81 +425,95 @@
         </section>
 
         <!-- Schedule Section -->
-        <section id="schedule" class="creative-bg fade-in-up">
-            <h2 class="text-shimmer">Our Weekly Adventure Plan</h2>
-            <div class="schedule-container">
-                <table class="schedule-table">
-                    <thead>
-                        <tr>
-                            <th>Day</th>
-                            <th>Session 1</th>
-                            <th>Session 2</th>
-                            <th>Session 3</th>
-                            <th>Session 4</th>
-                            <th class="break">Break Time!</th>
-                            <th>Session 5</th>
-                            <th>Session 6</th>
-                            <th>Session 7</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="day-cell bounce-effect">Sunday</td>
-                            <td class="session-indicator"><span class="subject">Activity 1</span></td>
-                            <td class="session-indicator"><span class="subject">Math</span></td>
-                            <td class="session-indicator"><span class="subject">Arabic</span></td>
-                            <td class="session-indicator"><span class="subject">English</span></td>
-                            <td class="break">Break</td>
-                            <td class="session-indicator"><span class="subject">Arabic</span></td>
-                            <td class="session-indicator"><span class="subject">Art</span></td>
-                            <td class="session-indicator"><span class="subject">Science</span></td>
-                        </tr>
-                        <tr>
-                            <td class="day-cell bounce-effect">Monday</td>
-                            <td class="session-indicator"><span class="subject">English</span></td>
-                            <td class="session-indicator"><span class="subject">Religion</span></td>
-                            <td class="session-indicator"><span class="subject">Arabic</span></td>
-                            <td class="session-indicator"><span class="subject">Entrepreneurship</span></td>
-                            <td class="break">Break</td>
-                            <td class="session-indicator"><span class="subject">English</span></td>
-                            <td class="session-indicator"><span class="subject">French/German</span></td>
-                            <td class="session-indicator"><span class="subject">Science</span></td>
-                        </tr>
-                        <tr>
-                            <td class="day-cell bounce-effect">Tuesday</td>
-                            <td class="session-indicator"><span class="subject">Religion</span></td>
-                            <td class="session-indicator"><span class="subject">English</span></td>
-                            <td class="session-indicator"><span class="subject">English</span></td>
-                            <td class="session-indicator"><span class="subject">Math</span></td>
-                            <td class="break">Break</td>
-                            <td class="session-indicator"><span class="subject">Social Studies</span></td>
-                            <td class="session-indicator"><span class="subject">Science</span></td>
-                            <td class="session-indicator"><span class="subject">Arabic</span></td>
-                        </tr>
-                        <tr>
-                            <td class="day-cell bounce-effect">Wednesday</td>
-                            <td class="session-indicator"><span class="subject">English</span></td>
-                            <td class="session-indicator"><span class="subject">French/German</span></td>
-                            <td class="session-indicator"><span class="subject">Science</span></td>
-                            <td class="session-indicator"><span class="subject">Social Studies</span></td>
-                            <td class="break">Break</td>
-                            <td class="session-indicator"><span class="subject">Arabic</span></td>
-                            <td class="session-indicator"><span class="subject">ICT</span></td>
-                            <td class="session-indicator"><span class="subject">English</span></td>
-                        </tr>
-                        <tr>
-                            <td class="day-cell bounce-effect">Thursday</td>
-                            <td class="session-indicator"><span class="subject">English</span></td>
-                            <td class="session-indicator"><span class="subject">Activity 2</span></td>
-                            <td class="session-indicator"><span class="subject">Math</span></td>
-                            <td class="session-indicator"><span class="subject">English</span></td>
-                            <td class="break">Break</td>
-                            <td class="session-indicator"><span class="subject">Arabic</span></td>
-                            <td class="session-indicator"><span class="subject">Arabic</span></td>
-                            <td class="session-indicator"><span class="subject">Social Studies</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+       <!-- Schedule Section -->
+<section id="schedule" class="creative-bg fade-in-up">
+    <h2 class="text-shimmer">Our Weekly Adventure Plan</h2>
+    <div class="schedule-container">
+        <table class="schedule-table">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Session 1</th>
+                    <th>Session 2</th>
+                    <th>Session 3</th>
+                    <th>Session 4</th>
+                    <th class="break">Break</th>
+                    <th>Session 5</th>
+                    <th>Session 6</th>
+                    <th>Session 7</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="day-cell">Sunday</td>
+                    <td class="session-indicator"><span class="subject activity">Activity 1</span></td>
+                    <td class="session-indicator"><span class="subject math">Math</span></td>
+                    <td class="session-indicator"><span class="subject arabic">Arabic</span></td>
+                    <td class="session-indicator"><span class="subject english">English</span></td>
+                    <td class="break">Break</td>
+                    <td class="session-indicator"><span class="subject arabic">Arabic</span></td>
+                    <td class="session-indicator"><span class="subject art">Art</span></td>
+                    <td class="session-indicator"><span class="subject science">Science</span></td>
+                </tr>
+                <tr>
+                    <td class="day-cell">Monday</td>
+                    <td class="session-indicator"><span class="subject english">English</span></td>
+                    <td class="session-indicator"><span class="subject religion">Religion</span></td>
+                    <td class="session-indicator"><span class="subject arabic">Arabic</span></td>
+                    <td class="session-indicator"><span class="subject entrepreneurship">Business</span></td>
+                    <td class="break">Break</td>
+                    <td class="session-indicator"><span class="subject english">English</span></td>
+                    <td class="session-indicator"><span class="subject french">French</span></td>
+                    <td class="session-indicator"><span class="subject science">Science</span></td>
+                </tr>
+                <tr>
+                    <td class="day-cell">Tuesday</td>
+                    <td class="session-indicator"><span class="subject religion">Religion</span></td>
+                    <td class="session-indicator"><span class="subject english">English</span></td>
+                    <td class="session-indicator"><span class="subject english">English</span></td>
+                    <td class="session-indicator"><span class="subject math">Math</span></td>
+                    <td class="break">Break</td>
+                    <td class="session-indicator"><span class="subject social-studies">Social Studies</span></td>
+                    <td class="session-indicator"><span class="subject science">Science</span></td>
+                    <td class="session-indicator"><span class="subject arabic">Arabic</span></td>
+                </tr>
+                <tr>
+                    <td class="day-cell">Wednesday</td>
+                    <td class="session-indicator"><span class="subject english">English</span></td>
+                    <td class="session-indicator"><span class="subject german">German</span></td>
+                    <td class="session-indicator"><span class="subject science">Science</span></td>
+                    <td class="session-indicator"><span class="subject social-studies">Social Studies</span></td>
+                    <td class="break">Break</td>
+                    <td class="session-indicator"><span class="subject arabic">Arabic</span></td>
+                    <td class="session-indicator"><span class="subject ict">ICT</span></td>
+                    <td class="session-indicator"><span class="subject english">English</span></td>
+                </tr>
+                <tr>
+                    <td class="day-cell">Thursday</td>
+                    <td class="session-indicator"><span class="subject english">English</span></td>
+                    <td class="session-indicator"><span class="subject activity">Activity 2</span></td>
+                    <td class="session-indicator"><span class="subject math">Math</span></td>
+                    <td class="session-indicator"><span class="subject english">English</span></td>
+                    <td class="break">Break</td>
+                    <td class="session-indicator"><span class="subject arabic">Arabic</span></td>
+                    <td class="session-indicator"><span class="subject arabic">Arabic</span></td>
+                    <td class="session-indicator"><span class="subject social-studies">Social Studies</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+        <!-- Thank You Section -->
+        <section class="thank-you-section fade-in-up">
+            <div class="thank-you-content">
+                <h2 class="text-shimmer">Thank You!</h2>
+                <div class="hearts">❤️ ❤️ ❤️</div>
+                <p>To our incredible teachers who have guided us with patience, wisdom, and endless encouragement - you are the true superheroes behind our success!</p>
+                <p>To our supportive parents and families who believed in us every step of the way - your love and support mean the world to us!</p>
+                <p>And to my amazing classmates in 8A - you have made this journey unforgettable. Let's continue to shine, learn, and grow together!</p>
+                <div class="hearts">💫 🌟 ✨</div>
+                <p class="signature">With gratitude and excitement for the future,<br>Your 8A Family</p>
             </div>
         </section>
     </div>
@@ -932,42 +533,5 @@
     <div class="back-to-top" id="backToTop">↑</div>
 
     <script src="script.js"></script>
-    <script>
-        // تأثير شريط التنقل المتقلص
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('main-header');
-            if (window.scrollY > 100) {
-                header.classList.add('compact');
-            } else {
-                header.classList.remove('compact');
-            }
-        });
-
-        // تأثيرات إضافية عند التمرير
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.floating-element');
-            
-            parallaxElements.forEach(function(element, index) {
-                const speed = 0.5 + (index * 0.1);
-                element.style.transform = `translateY(${scrolled * speed * 0.1}px)`;
-            });
-        });
-
-        // تأثيرات عند تحميل الصفحة
-        document.addEventListener('DOMContentLoaded', function() {
-            // تأثيرات دخول العناصر
-            const elements = document.querySelectorAll('.fade-in-up');
-            elements.forEach(function(element, index) {
-                element.style.animationDelay = `${index * 0.2}s`;
-            });
-            
-            // تأثيرات للبطاقات
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(function(card, index) {
-                card.style.animationDelay = `${index * 0.1}s`;
-            });
-        });
-    </script>
 </body>
 </html>
